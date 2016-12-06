@@ -1,41 +1,61 @@
 
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 /**
  * Servlet implementation class ConexionesServlet
  */
 @WebServlet("/ConexionesServlet")
 public class ConexionesServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+	private Conexiones conexiones;
+	private ArrayList<Conexion> conexionesList = new ArrayList<Conexion>();
     public ConexionesServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		conexiones = new Conexiones();
+		leerJson();
+		conexiones.setConexiones(conexionesList);
+		request.setAttribute("cxs", conexiones);
+		ServletContext sc = getServletContext();
+		RequestDispatcher rd = sc.getRequestDispatcher("/conexiones.jsp");
+		rd.forward(request,response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		String id = request.getParameter("action");
+		leerJson();
 		doGet(request, response);
 	}
+	
+	private void leerJson(){
+		File f = new File(getServletContext().getRealPath("conexiones.json"));
+		Gson gson = new Gson();
+		try{
+			BufferedReader br = new BufferedReader(new FileReader(f));
+			conexionesList = gson.fromJson(br, new TypeToken<List<Conexion>>(){}.getType());
+		}catch(Exception e){
+			
+		}	
+	}
+	
+	
 
 }
