@@ -21,7 +21,7 @@
 
 <div class="container">
 
-    <form class="well form-horizontal" action=" " method="post"  id="contact_form">
+    <form class="well form-horizontal" action="IndexServlet" method="post"  id="contact_form">
 <fieldset>
 
 <!-- Form Name -->
