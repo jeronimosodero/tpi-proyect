@@ -37,6 +37,7 @@
       <th>Direccion de la conexion</th>
       <th>Estandar de metadatos</th>
       <th>Repositorio</th>
+      <th>Lenguaje</th>
       <th></th>
     </tr>
   </thead>
@@ -47,6 +48,7 @@
       <td>${c.url}</td>
       <td>${c.estandar}</td>
       <td>${c.repositorio}</td>
+      <td>${c.lenguaje}</td>
       <td><button type="submit" value="${c.id}"name="action" class="btn btn-xs btn-primary">Eliminar</button></td>
     </tr>
  	</c:forEach>
@@ -55,7 +57,7 @@
 
 
 <!-- Text input-->
-<div class="row">
+<div  class="row">
   <div class="col-lg-4">
 <label for="basic-url">Dirección de la conexión</label>
 <div class="input-group">
@@ -84,10 +86,30 @@
   </select>
 </div>
 </div>
-<div class="col-lg-2 col-lg-offset-1">
 
+<div class="col-lg-2" style="padding-left: 	30px;">
+<div class="form-group">
+  <label for="sel1">Lenguaje</label>
+  <select class="form-control" id="sel1">
+    <option>Español (es)</option>
+    <option>Inglés - Estados Unidos (en___US)</option>
+    <option>Inglés (en)</option>
+    <option>Alemán (de)</option>
+    <option>Frances (fr)</option>
+    <option>Italiano (it)</option>
+    <option>Japonés (ja)</option>
+    <option>Chino (zh)</option>
+    <option>Otro</option>
+  </select>
+</div>
+</div>
+
+
+<div class="col-lg-2" style="padding-left: 	30px;">
 <button type="submit" class="btn btn-primary" style="margin-top: 25px">Guardar</button>
 </div>
+
+
 </div>
 <!-- Button -->
 
