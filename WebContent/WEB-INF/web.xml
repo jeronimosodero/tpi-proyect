@@ -9,7 +9,7 @@
     <servlet-name>Index</servlet-name>
     <url-pattern>/index</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <servlet-name>Conexiones</servlet-name>
     <servlet-class>ConexionesServlet</servlet-class>
   </servlet>

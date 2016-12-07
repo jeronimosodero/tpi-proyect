@@ -1,3 +1,4 @@
+package servlets;
 
 
 import java.io.BufferedReader;
@@ -18,6 +19,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import classes.Conexion;
+import classes.Conexiones;
+
 /**
  * Servlet implementation class ConexionesServlet
  */
@@ -31,7 +35,7 @@ public class ConexionesServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		conexiones = new Conexiones();
-		leerJson();
+		conexionesList = leerJson();
 		conexiones.setConexiones(conexionesList);
 		request.setAttribute("cxs", conexiones);
 		ServletContext sc = getServletContext();
@@ -45,15 +49,17 @@ public class ConexionesServlet extends HttpServlet {
 		doGet(request, response);
 	}
 	
-	private void leerJson(){
+	protected ArrayList<Conexion> leerJson(){
 		File f = new File(getServletContext().getRealPath("conexiones.json"));
 		Gson gson = new Gson();
+		ArrayList<Conexion> conexionList = new ArrayList<Conexion>();
 		try{
 			BufferedReader br = new BufferedReader(new FileReader(f));
-			conexionesList = gson.fromJson(br, new TypeToken<List<Conexion>>(){}.getType());
+			conexionList = gson.fromJson(br, new TypeToken<List<Conexion>>(){}.getType());
 		}catch(Exception e){
 			
 		}	
+		return conexionList;
 	}
 	
 	

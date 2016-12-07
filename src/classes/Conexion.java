@@ -1,3 +1,4 @@
+package classes;
 
 public class Conexion {
 	private String url,estandar,repositorio;

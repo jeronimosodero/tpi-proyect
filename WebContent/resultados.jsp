@@ -13,10 +13,6 @@
 </head>
 <body>
 
-
-
-
-
 <div class="container">
 
     <form class="well form-horizontal" action=" " method="post"  id="contact_form">
