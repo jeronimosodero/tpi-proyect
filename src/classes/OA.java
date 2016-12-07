@@ -2,8 +2,7 @@ package classes;
 import java.util.Date;
 
 public class OA {
-	private String titulo, autor, abst, url;
-	private Date fechaPublic;
+	private String titulo, autor, abst, url,fecha;
 	
 public String getTitulo() {
 	return titulo;
@@ -29,11 +28,11 @@ public String getUrl() {
 public void setUrl(String url) {
 	this.url = url;
 }
-public Date getFechaPublic() {
-	return fechaPublic;
+public String getFecha() {
+	return fecha;
 }
-public void setFechaPublic(Date fechaPublic) {
-	this.fechaPublic = fechaPublic;
+public void setFecha(String fecha) {
+	this.fecha = fecha;
 }
 
 }
