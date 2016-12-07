@@ -30,7 +30,7 @@
   <div class="col-md-4 inputGroupContainer">
   <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-chevron-right"></i></span>
-  <input  name="title" placeholder="Nombre del objeto" class="form-control"  type="text">
+  <input  name="dc.title" placeholder="Nombre del objeto" class="form-control"  type="text">
     </div>
   </div>
 </div>
@@ -42,7 +42,7 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-  <input name="creador" placeholder="Entidad creadora del objeto" class="form-control"  type="text">
+  <input name="dc.contributor.author" placeholder="Entidad creadora del objeto" class="form-control"  type="text">
     </div>
   </div>
 </div>

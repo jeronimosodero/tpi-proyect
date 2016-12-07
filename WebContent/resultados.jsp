@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -23,18 +25,18 @@
 
 <ul class="ds-artifact-list list-unstyled">
 
-<li class="ds-artifact-item">
-<div class="artifact-description">
-<h4 class="artifact-title">
-<a href="">Estaci&oacute;n transformadora 132 kV Islas</a></h4>
-<div class="artifact-info">
-<span class="author h4"><small>Garabuau Parise, Juan Ignacio</small></span> <span class="publisher-date h4"><small>(<span class="date">2015-12-22</span>)</small></span>
-</div>
-<div class="artifact-abstract">Este proyecto se ha realizado en el marco de estudio de ingenier&iacute;a b&aacute;sica para el dise&ntilde;o de una estaci&oacute;n&#13;
-transformadora y an&aacute;lisis econ&oacute;mico &ndash; financiero de la misma. Se presenta a las autoridades de ENERSA y a todos ...</div>
-</div>
-</li>
-
+ <c:forEach items="${oas.oas}" var="oa">
+	<li class="ds-artifact-item">
+	<div class="artifact-description">
+	<h4 class="artifact-title">
+	<a href="${oa.url}">${oa.titulo}</a></h4>
+	<div class="artifact-info">
+	<span class="author h4"><small>${oa.autor}</small></span> <span class="publisher-date h4"><small>(<span class="date">${oa.fecha}</span>)</small></span>
+	</div>
+	<div class="artifact-abstract">${oa.abst}</div>
+	</div>
+	</li>
+ </c:forEach>
 
 </ul>
 

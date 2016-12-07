@@ -2,18 +2,15 @@ package classes;
 import java.util.ArrayList;
 
 public class OAs {
-    private ArrayList<OA> objetos = new ArrayList<OA>();
+    private ArrayList<OA> oas = new ArrayList<OA>();
     
-    OAs(){}
+    public OAs(){}
 
-	public ArrayList<OA> getOAs() {
-		return objetos;
+	public ArrayList<OA> getOas() {
+		return oas;
 	}
 
-	public void setOAs(ArrayList<OA> oas) {
-		this.objetos = oas;
+	public void setOas(ArrayList<OA> oas) {
+		this.oas = oas;
 	}
-    
-    
-    
 }
