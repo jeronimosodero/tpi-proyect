@@ -73,7 +73,7 @@ public class ConexionesServlet extends HttpServlet {
 		doGet(request, response);
 	}
 	
-	protected ArrayList<Conexion> leerJson() throws IOException{
+	static protected ArrayList<Conexion> leerJson() throws IOException{
 		
 		String tmpPath = System.getProperty("java.io.tmpdir") + "/conexiones.json";
 		//File f = new File(getServletContext().getRealPath("conexiones.json"));
