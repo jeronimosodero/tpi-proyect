@@ -49,7 +49,7 @@
       <td>${c.estandar}</td>
       <td>${c.repositorio}</td>
       <td>${c.lenguaje}</td>
-      <td><button type="submit" value="${c.id}"name="action" class="btn btn-xs btn-primary">Eliminar</button></td>
+      <td><button type="submit" value="${c.id}" name="boton" class="btn btn-xs btn-primary">Eliminar</button></td>
     </tr>
  	</c:forEach>
    </tbody>
@@ -62,13 +62,13 @@
 <label for="basic-url">Dirección de la conexión</label>
 <div class="input-group">
   <span class="input-group-addon" id="basic-addon3">https://</span>
-  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+  <input type="text" name="dir" class="form-control" id="basic-url" aria-describedby="basic-addon3">
 </div>
 </div>
 <div class="col-lg-2">
 <div class="form-group">
   <label for="sel1">Estandar de metadatos</label>
-  <select class="form-control" id="sel1">
+  <select name="est" class="form-control" id="sel1">
     <option>DC</option>
     <option>LOM</option>
     <option>MODS</option>
@@ -80,7 +80,7 @@
 <div class="col-lg-2" style="padding-left: 30px;">
 <div class="form-group">
   <label for="sel1">Repositorio</label>
-  <select class="form-control" id="sel1">
+  <select name="rep" class="form-control" id="sel1">
     <option>DSpace</option>
     <option>Eprints</option>
   </select>
@@ -90,7 +90,7 @@
 <div class="col-lg-2" style="padding-left: 	30px;">
 <div class="form-group">
   <label for="sel1">Lenguaje</label>
-  <select class="form-control" id="sel1">
+  <select name="len" class="form-control" id="sel1">
     <option>Español (es)</option>
     <option>Inglés - Estados Unidos (en___US)</option>
     <option>Inglés (en)</option>
@@ -106,7 +106,7 @@
 
 
 <div class="col-lg-2" style="padding-left: 	30px;">
-<button type="submit" class="btn btn-primary" style="margin-top: 25px">Guardar</button>
+<button type="submit" name="boton" value="guardar" class="btn btn-primary" style="margin-top: 25px">Guardar</button>
 </div>
 
 
