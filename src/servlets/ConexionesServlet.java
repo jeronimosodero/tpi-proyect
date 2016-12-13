@@ -43,7 +43,6 @@ public class ConexionesServlet extends HttpServlet {
 		ServletContext sc = getServletContext();
 		RequestDispatcher rd = sc.getRequestDispatcher("/conexiones.jsp");
 		rd.forward(request,response);
-		System.out.println(System.getProperty("java.io.tmpdir"));
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -56,7 +55,7 @@ public class ConexionesServlet extends HttpServlet {
 		}
 		String accion = request.getParameter("boton");
 		if (accion.equals("guardar")){
-			String dir = request.getParameter("dir");
+			String dir = "http://" + request.getParameter("dir");
 			String est = request.getParameter("est");
 			String rep = request.getParameter("rep");
 			String len = request.getParameter("len");

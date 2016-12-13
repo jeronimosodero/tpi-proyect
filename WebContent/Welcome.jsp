@@ -54,10 +54,10 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a class="page-scroll" href="conexiones.jsp">Gestionar conexiones</a>
+                        <a class="page-scroll" href="conexiones">Gestionar conexiones</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="index.jsp">Realizar búsquedas</a>
+                        <a class="page-scroll" href="index">Realizar búsquedas</a>
                     </li>
                     <li>
                         <a class="page-scroll" href="#contact">Contacto</a>

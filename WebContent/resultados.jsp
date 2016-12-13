@@ -1,8 +1,13 @@
+
+
+
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
@@ -21,7 +26,12 @@
 <fieldset>
 
 <!-- Form Name -->
-<legend>Resultados</legend>
+<h1>Resultados</h1>
+
+<c:if test="${empty oas.oas}">
+<h2>No hay resultados...</h2>
+</c:if>
+
 
 <ul class="ds-artifact-list list-unstyled">
 

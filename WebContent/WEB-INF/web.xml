@@ -9,6 +9,14 @@
     <servlet-name>Index</servlet-name>
     <url-pattern>/index</url-pattern>
   </servlet-mapping>
+    <servlet>
+    <servlet-name>Resultados</servlet-name>
+    <servlet-class>servlets.ResultadosServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Resultados</servlet-name>
+    <url-pattern>/resultados</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>Conexiones</servlet-name>
     <servlet-class>servlets.ConexionesServlet</servlet-class>

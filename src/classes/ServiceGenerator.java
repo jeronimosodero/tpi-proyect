@@ -19,14 +19,14 @@ public class ServiceGenerator {
 
     private static Retrofit.Builder builder =
             new Retrofit.Builder()
-                    .baseUrl(API_BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create());
 
-    public static <S> S createService(Class<S> serviceClass) {
+    public static <S> S createService(Class<S> serviceClass,String baseUrl) {
     	HttpLoggingInterceptor logging = new HttpLoggingInterceptor();  
     	// set your desired log level
     	logging.setLevel(Level.BODY);
     	httpClient.addInterceptor(logging);
+    	builder.baseUrl(baseUrl+"/rest/items/");
         Retrofit retrofit = builder.client(httpClient.build()).build();
         return retrofit.create(serviceClass);
     }

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 
 <!-- Website template by freewebsitetemplates.com -->
 <html>
@@ -17,7 +17,7 @@
 
 <div class="container">
 
-    <form class="well form-horizontal" action="index" method="post"  id="contact_form">
+    <form class="well form-horizontal" action="resultados" method="post"  id="contact_form">
 <fieldset>
 
 <!-- Form Name -->
@@ -101,7 +101,7 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-chevron-right"></i></span>
-  <input name="contribuyentes" placeholder="Entidad encargada de hacer colaboraciones en el objeto" class="form-control"  type="date">
+  <input name="dc.date.issued" placeholder="Entidad encargada de hacer colaboraciones en el objeto" class="form-control"  type="date">
     </div>
   </div>
 </div>
