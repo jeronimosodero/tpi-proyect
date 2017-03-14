@@ -53,19 +53,21 @@ public class ConexionesServlet extends HttpServlet {
 		} else {
 			maxId = 1;
 		}
-		String accion = request.getParameter("boton");
+		String accion = (String) request.getParameter("boton");
+		System.out.println(accion);
+			
 		if (accion.equals("guardar")){
-			String dir = "http://" + request.getParameter("dir");
-			String est = request.getParameter("est");
-			String rep = request.getParameter("rep");
-			String len = request.getParameter("len");
-			Conexion con = new Conexion(dir,est,rep, maxId, len);
+			String nombre = request.getParameter("nombre");
+			String url = request.getParameter("url");
+			String estandar = request.getParameter("estandar");
+			Conexion con = new Conexion(maxId,nombre,url,estandar);
 			conexionesList.add(con);
 		} else {
 		 	int index = Integer.valueOf(accion);
 			Predicate<Conexion> pred = c -> c.getId() == index;
 			conexionesList.removeIf(pred);
-		} 
+		}
+		
 		System.out.println(conexionesList);
 		escribirJson(conexionesList);
 		conexionesList = leerJson();

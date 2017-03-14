@@ -59,7 +59,7 @@
       </div>
 
       <div class="center-align">
-        <a href="javascript:{}" onclick="document.getElementById('my_form').submit();" class="waves-effect waves-light btn red darken-4" type="submit"><i class="material-icons left">search</i>Buscar</a>
+        <a href="javascript:{}" onclick="document.getElementById('my_form').submit();" prueba="reloco" class="waves-effect waves-light btn red darken-4" type="submit"><i class="material-icons left">search</i>Buscar</a>
         <a class="waves-effect waves-light btn red darken-4 botoncampos"><i class="material-icons left">add</i>Buscar por campos</a>
       </div>
       </form>
