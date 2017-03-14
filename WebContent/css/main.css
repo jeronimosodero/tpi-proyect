@@ -1,1 +1,52 @@
-#success_message{ display: none;}
+.eje {
+	display: inline-block;
+}
+
+.pagination {
+  display: inline-block;
+}
+
+.pagination li.active {
+    background-color: #b71c1c;
+}
+
+
+.collection .collection-item.avatar i.circle{
+	font-style: normal; 
+	
+}
+
+.enca {
+	color:#b71c1c;
+}
+
+.autor {
+	margin-bottom: 5px !important;
+    color: grey;
+}
+
+
+  body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+    background: url("../images/faded2.png"); 
+  }
+
+
+.collection {
+	border: none;
+}
+
+
+.collection .collection-item {
+  	border-bottom: 1px dashed #e0e0e0;
+  	background-color: rgba(255,255,255,0.3);
+  	    padding-bottom: 30px;
+    padding-top: 30px;
+
+  }
