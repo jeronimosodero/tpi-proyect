@@ -9,7 +9,7 @@
     <servlet-name>Index</servlet-name>
     <url-pattern>/index</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <servlet-name>Resultados</servlet-name>
     <servlet-class>servlets.ResultadosServlet</servlet-class>
   </servlet>
@@ -27,5 +27,5 @@
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>Welcome.jsp</welcome-file>
-</welcome-file-list>
+  </welcome-file-list>
 </web-app>
