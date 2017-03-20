@@ -13,10 +13,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Resultados</title>
-  <link rel="stylesheet" type="text/css" href="css/main.css">
+ 
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-  <script src="js/inicio.js" type="text/javascript"></script>
-  <script src="js/bootstrap.js" type="text/javascript"></script>
+   <link rel="stylesheet" type="text/css" href="css/main2.css">
+
 </head>
 <body>
 

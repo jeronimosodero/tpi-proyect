@@ -1,3 +1,8 @@
+button { 
+	border:none;
+	background:none
+	} 
+
 .eje {
 	display: inline-block;
 }
@@ -24,9 +29,7 @@
 	margin-bottom: 5px !important;
     color: grey;
 }
-
-
-  body {
+body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;

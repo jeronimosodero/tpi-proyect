@@ -15,7 +15,7 @@
       <!--Import materialize.css-->
       
       <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-<link rel="stylesheet" type="text/css" href="css/main.css">
+<link rel="stylesheet" type="text/css" href="css/main2.css">
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
@@ -54,7 +54,7 @@
       <div class="row">
         <div class="input-field col s8 offset-s2">
           <input placeholder="" name="busqcampo" type="text" class="validate">
-          <label for="busqcampo">BÃºsqueda por todos los campos</label>
+          <label for="busqcampo">Busqueda por todos los campos</label>
         </div>
       </div>
 
@@ -85,22 +85,12 @@
       
 
 
-      <hr style="border-top: 1px dashed black">
+  <hr style="border-top: 1px dashed black">
 
 
 
 
-<div class="container center-align">
-  <ul class="pagination">
-    <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-    <li class="active"><a href="#!">1</a></li>
-    <li class="waves-effect"><a href="#!">2</a></li>
-    <li class="waves-effect"><a href="#!">3</a></li>
-    <li class="waves-effect"><a href="#!">4</a></li>
-    <li class="waves-effect"><a href="#!">5</a></li>
-    <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-  </ul>
-  </div>
+
     </div>
     
    
@@ -125,8 +115,7 @@
 
   <!--  Scripts-->
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="js/materialize.js"></script>
- 
+  <script src="js/materialize.js"></script> 
   <script src="js/init.js"></script>
 
   </body>
