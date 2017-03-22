@@ -2,9 +2,6 @@
     $('select').material_select();
     $('.tooltipped').tooltip({delay: 50});
 
-
-
-
     var added = '	<div class="row">\
   <div class="input-field col s3 offset-s2">\
     	<select name="parametros">\
@@ -55,28 +52,24 @@
 
 
     $(".botoncampos").click(function(e){
-    	e.preventDefault(); 
-    	$(this).parent('div').parent('div').remove();
+    	e.preventDefault();
+    	
+    	$(this).parent('div').parent('form').parent('div').remove();
+    	
     	$(".buscador").append(porcampos)
     	$('select').material_select(); 
 
 
     	$(".add_field_button").click(function(e){ //on add input button click
-        e.preventDefault();        
-        $(".filas").append(added);
-        $('select').material_select(); //add input box        
+    		e.preventDefault();        
+    		$(".filas").prepend(added);
+    		$('select').material_select(); //add input box        
     	});
     
     	$(".filas").on("click",".remove_field", function(e){ //user click on remove text
-        e.preventDefault(); $(this).parent('div').parent('div').remove();
+    		e.preventDefault(); $(this).parent('div').parent('div').remove();
+    	})
     })
-    })
-
-
-
-
-
-
 
 
 
