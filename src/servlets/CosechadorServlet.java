@@ -7,10 +7,14 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -42,12 +46,19 @@ public class CosechadorServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    ArrayList<Conexion> conexiones = ConexionesServlet.leerJson();
 	    for (Conexion con: conexiones){
-	    	String path = getServletContext().getRealPath("")
-	    	
+	    	String path = getServletContext().getRealPath("");
+    	
 	    	String url = con.getUrl();
 	    	String charset = java.nio.charset.StandardCharsets.UTF_8.name();
 	    	String verbo = "ListRecords";
 	    	String formato = con.getEstandar();
+	    	Date fecha_ahora = new Date();
+	    	SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
+	        String fecha = dt.format(fecha_ahora);
+	        String dataFolderPath = path + "data";
+	        new File(dataFolderPath).mkdirs();
+	    	String filePath = dataFolderPath + "\\" + formato + "-" + fecha + ".xml";
+	    	
 	    	//String set = "mussm";
 
 	    	String query = String.format("verb=%s&metadataPrefix=%s", 
@@ -68,10 +79,8 @@ public class CosechadorServlet extends HttpServlet {
 	    	    System.out.println(responseBody);
 	    	}
 	    	
-			String path = getServletContext().getRealPath("")+ "data";
-			System.out.println(path);
-			new File(path).mkdirs();
-			File f1 = new File(path + "/xml.xml");    
+			System.out.println(filePath);
+			File f1 = new File(filePath);    
 			try {
 	        	 FileWriter f2 = new FileWriter(f1, false);
 	        	 f2.write(responseBody);
@@ -80,8 +89,13 @@ public class CosechadorServlet extends HttpServlet {
 	             // TODO Auto-generated catch block
 	             e.printStackTrace();
 	         }
+			
+			request.getAttribute("cxs");
+			ServletContext sc = getServletContext();
+			RequestDispatcher rd = sc.getRequestDispatcher("/conexiones.jsp");
+			rd.forward(request,response);
 	    }
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	    
 	}
 
 	/**
