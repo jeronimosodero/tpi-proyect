@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.ConnectException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
@@ -46,54 +47,77 @@ public class CosechadorServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    ArrayList<Conexion> conexiones = ConexionesServlet.leerJson();
 	    for (Conexion con: conexiones){
-	    	String path = getServletContext().getRealPath("");
-    	
+	    	String path = getServletContext().getRealPath("");   	
 	    	String url = con.getUrl();
 	    	String charset = java.nio.charset.StandardCharsets.UTF_8.name();
 	    	String verbo = "ListRecords";
-	    	String formato = con.getEstandar();
+	    	String formato = con.getEstandar().trim();
+	    	String conexion = con.getNombre().trim();
+
 	    	Date fecha_ahora = new Date();
 	    	SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
 	        String fecha = dt.format(fecha_ahora);
 	        String dataFolderPath = path + "data";
-	        new File(dataFolderPath).mkdirs();
-	    	String filePath = dataFolderPath + "\\" + formato + "-" + fecha + ".xml";
-	    	
-	    	//String set = "mussm";
+	        String fileName = conexion + "%" + formato + "%" + fecha + ".xml";	        
+	        File folder = new File(dataFolderPath);
+	        folder.mkdirs();
+	        System.out.println(dataFolderPath);
+	        String query = "";
+	        boolean exists = false;
+	        String fecha_desde = "";
+	        File[] listOfFiles = folder.listFiles();
+	        for (File file : listOfFiles) {
+	            if (file.isFile()) {
+	            	String oldFileName = file.getName();
+	            	System.out.println(oldFileName.split("%")[2].substring(0,10));
+	            	System.out.println(formato);
+	                if (oldFileName.contains(formato)) {
+	                	exists = true;
+	                	fecha_desde = oldFileName.split("%")[2].substring(0,10);
+	                }
+	            }
+	        }
+	        
+	        if (exists) {
+	        	query = String.format("verb=%s&metadataPrefix=%s&from=%s", 
+	        		    URLEncoder.encode(verbo, charset), 
+	        		    URLEncoder.encode(formato, charset),
+	        		    URLEncoder.encode(fecha_desde, charset));
+            }
+            else{
+    	    	query = String.format("verb=%s&metadataPrefix=%s", 
+    	    			URLEncoder.encode(verbo, charset), 
+    		    	    URLEncoder.encode(formato, charset)
+    		    	    );
+            }
+	        System.out.println(query);
+	        
+	    	String filePath = dataFolderPath + "\\" + fileName;
 
-	    	String query = String.format("verb=%s&metadataPrefix=%s", 
-	    	     URLEncoder.encode(verbo, charset), 
-	    	     URLEncoder.encode(formato, charset)
-	    	     //,URLEncoder.encode(set, charset)
-	    	     );
-	    	
-	    	System.out.println(query);
-	    	
-	    	URLConnection connection = new URL(url + "?" + query).openConnection();
-	    	connection.setRequestProperty("Accept-Charset", charset);
-	    	InputStream respuesta = connection.getInputStream();
-	    	
-	    	String responseBody = "";
-	    	try (Scanner scanner = new Scanner(respuesta)) {
-	    	    responseBody = scanner.useDelimiter("\\A").next();
-	    	    System.out.println(responseBody);
+	    	try {
+		    	URLConnection connection = new URL(url + "?" + query).openConnection();
+		    	connection.setRequestProperty("Accept-Charset", charset);
+		    	InputStream respuesta = connection.getInputStream();
+		    	String responseBody = "";
+		    	try (Scanner scanner = new Scanner(respuesta)) {
+		    	    responseBody = scanner.useDelimiter("\\A").next();
+		    	    System.out.println(responseBody);
+		    	}
+		    	System.out.println(filePath);
+				File f1 = new File(filePath);    
+				try {
+		        	 FileWriter f2 = new FileWriter(f1, false);
+		        	 f2.write(responseBody);
+		             f2.close();
+		         } catch (IOException e) {
+		             // TODO Auto-generated catch block
+		             e.printStackTrace();
+		         }
 	    	}
-	    	
-			System.out.println(filePath);
-			File f1 = new File(filePath);    
-			try {
-	        	 FileWriter f2 = new FileWriter(f1, false);
-	        	 f2.write(responseBody);
-	             f2.close();
-	         } catch (IOException e) {
-	             // TODO Auto-generated catch block
-	             e.printStackTrace();
-	         }
-			
-			request.getAttribute("cxs");
-			ServletContext sc = getServletContext();
-			RequestDispatcher rd = sc.getRequestDispatcher("/conexiones.jsp");
-			rd.forward(request,response);
+	    	catch (ConnectException e){
+	    		System.out.println("Connection Timeout");
+	    	}
+
 	    }
 	    
 	}
