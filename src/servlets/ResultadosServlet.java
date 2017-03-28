@@ -67,95 +67,56 @@ public class ResultadosServlet extends HttpServlet {
 		String[] values = req.getParameterValues("campo");
 		
 		
-		FileInputStream fis = new FileInputStream(new File("C:/Users/Jero/Downloads/example.xml"));
-		InputStreamReader inputStreamReader = new InputStreamReader((InputStream)fis, "UTF-8");
-		BufferedReader br = new BufferedReader(inputStreamReader);
-		String line;
-		StringBuilder sb = new StringBuilder();
-		while ((line = br.readLine()) != null) {
-		    sb.append(line);
-		}
-		Document doc = Jsoup.parse(sb.toString(), "UTF-8", Parser.xmlParser());
-		//Document doc = Jsoup.connect("https://rdu.unc.edu.ar/oai/request?verb=ListRecords&metadataPrefix=oai_dc").followRedirects(true).get();
-		//String query = "record:contains("+ busqueda + ")";
-		String query = "record";
-		Elements records = doc.select(query);
-		for(int i = 0;i<keys.length;i++){
-			query = "record:has(" + keys[i] + ":contains(" + values[i] + "))";
-			System.out.println(query);
-			records = records.select(query);
-		}
-		
+		String path = getServletContext().getRealPath("");
+		String dataFolderPath = path + "data";
+		File folder = new File(dataFolderPath);
+        folder.mkdirs();
+        File[] listOfFiles = folder.listFiles();
 		ArrayList<OA> oasList = new ArrayList<OA>();
-		for(Element record: records){
-			OA oa = new OA();
-			oa.setAbst(record.select("dc|description").text());
-			oa.setAutor(record.select("dc|creator").text());
-			oa.setFecha(record.select("datestamp").text());
-			oa.setTitulo(record.select("dc|title").text());
-			oa.setUrl("http://" + record.select("identifier").text().substring(4).replace(":", "/"));
-			oasList.add(oa);
-		}
+        for (File file : listOfFiles) {
+    		FileInputStream fis = new FileInputStream(file);
+    		InputStreamReader inputStreamReader = new InputStreamReader((InputStream)fis, "UTF-8");
+    		BufferedReader br = new BufferedReader(inputStreamReader);
+    		String line;
+    		StringBuilder sb = new StringBuilder();
+    		while ((line = br.readLine()) != null) {
+    		    sb.append(line);
+    		}
+    		Document doc = Jsoup.parse(sb.toString(), "UTF-8", Parser.xmlParser());
+    		Elements records;
+    		if(busqueda == null){
+        		records = doc.select("record");
+        		for(int i = 0;i<keys.length;i++){
+        			String query = "record:has(" + keys[i] + ":contains(" + values[i] + "))";
+        			System.out.println(query);
+        			records = records.select(query);
+        		}	
+    		}else{
+        		String query = "record:contains("+ busqueda + ")";
+        		records = doc.select(query);
+    		}
+    		for(Element record: records){
+    			OA oa = new OA();
+    			if(file.getName().contains("dc")){
+        			oa.setAbst(record.select("dc|description").text());
+        			oa.setAutor(record.select("dc|creator").text());
+        			oa.setFecha(record.select("datestamp").text());
+        			oa.setTitulo(record.select("dc|title").text());
+        			oa.setUrl("http://" + record.select("identifier").text().substring(4).replace(":", "/"));	
+    			}else{
+        			oa.setAbst(record.select("mods|abstract").text());
+        			oa.setAutor(record.select("mods|name").text());
+        			oa.setFecha(record.select("datestamp").text());
+        			oa.setTitulo(record.select("mods|title").text());
+        			oa.setUrl("http://" + record.select("identifier").text().substring(4).replace(":", "/"));	
+    			}
+
+    			oasList.add(oa);
+    		}
+        }
 		System.out.println(oasList.size());
 		oas.setOas(oasList);
 		
-		/*
-		oas = new OAs();
-		String key = "";
-		String value = "";
-		String title = req.getParameter(DC_TITLE);
-		String author = req.getParameter(DC_AUTHOR);
-		String date = req.getParameter(DC_DATE);
-		if(title != null && title.length() > 0){
-			key = DC_TITLE;
-			value = title;
-		}else if( author != null && author.length() > 0){
-			key = DC_AUTHOR;
-			value = author;
-		}else if(date != null && date.length() > 0){
-			key = DC_DATE;
-			value = date;
-		}else{
-			doGet(req, resp);
-			return;
-		}
-		List<Conexion> conexiones = ConexionesServlet.leerJson();
-		ArrayList<OA> oasList = new ArrayList<OA>();
-		for(Conexion conexion : conexiones){
-			Endpoint endpoint = ServiceGenerator.createService(Endpoint.class,conexion.getUrl());
-			Call<List<Result>> call;
-			if(key.equals(DC_TITLE)){
-				call = endpoint.findByMetadataField(new Request(key,value,"en_US"));
-			}else{
-				call = endpoint.findByMetadataField(new Request(key,value,null));
-			}
-			try{
-				List<Result> results = call.execute().body();
-				for(Result result : results){
-					Call<List<Metadata>> callMetadata = endpoint.getOA(result.getId());
-					List<Metadata> metadatos = callMetadata.execute().body();
-					OA oa = new OA();
-					oa.setUrl(conexion.getUrl()+"/xmlui/handle/"+result.getHandle());
-					for(Metadata metadata : metadatos){
-						if(metadata.getKey().equals("dc.contributor.author")){
-							oa.setAutor(metadata.getValue());
-						}else if(metadata.getKey().equals("dc.title")){
-							oa.setTitulo(metadata.getValue());
-						}else if(metadata.getKey().equals("dc.date.issued")){
-							oa.setFecha(metadata.getValue());
-						}else if(metadata.getKey().equals("dc.description.abstract")){
-							oa.setAbst(metadata.getValue());
-						}
-					}
-					oasList.add(oa);
-				}
-				oas.setOas(oasList);
-			}catch(Exception e){
-				e.printStackTrace();
-			}	
-		}
-		*/
-
 		doGet(req, resp);
 	}
 	

@@ -83,7 +83,9 @@
          </c:forEach>    
   </ul>
       
-
+    <c:if test="${ empty oas.oas}">
+		<h4>No hay resultados</h2>    
+	</c:if>
 
   <hr style="border-top: 1px dashed black">
 
