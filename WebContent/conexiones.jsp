@@ -70,7 +70,7 @@
           </select>
           <label>Estándar de Metadatos</label>   
         </div><button name="boton" type="submit" value="guardar">
-        <a  href="javascript:{}" onclick="document.getElementById('conexion_load').submit();"  class="btn btn-floating btn-flat" style="border-top-width: 15px;margin-top: 18px;margin-left: 5px;">
+        <a href="javascript:{}" onclick="document.getElementById('conexion_load').submit();"  class="btn btn-floating btn-flat" style="border-top-width: 15px;margin-top: 18px;margin-left: 5px;">
           <i class="small material-icons red darken-4">send</i>
         </a>
         </button>
@@ -128,19 +128,31 @@
   </div>
 </main>
   <footer class="page-footer grey darken-3"> 
-    
+    <form action="conexiones" method="post" id="conexion_act">
+      <c:if test="${not empty fecha}">
+
+
+      
       <div class="footer-copyright red darken-4">
       <div class="container">
-      La última actualización se realizó el día Martes 7 de Marzo de 2017 a las 19:48 
-       <a class="orange-text text-lighten-3" href="">Actualizar</a>
+      La última actualización se realizó el día <span>${fecha}</span>
+      <button name="boton" type="submit" value="guardar">
+        <a href="javascript:{}" onclick="document.getElementById('conexion_act').submit();" style="border-top-width: 15px;margin-top: 18px;margin-left: 5px;">
+        Actualizar	
+        </a>
+        </button>
       </div>
     </div>
+    
+    </c:if>
+    
     <div class="footer-copyright">
       <div class="container">
       Sistema de Interoperabilidad Basado en Ontologías para Repositorios de Objetos de Aprendizaje  
        <a class="orange-text text-lighten-3" href="http://www.frre.utn.edu.ar/">UTN FRRe</a>
       </div>
     </div>
+    </form>
   </footer>
 
 
