@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,15 +29,9 @@
   <nav class="grey darken-3" role="navigation">
     <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Buscador</a>
       <ul class="right hide-on-med-and-down">
-        <li><a href="#">Buscar</a></li>
-        <li><a href="#">Cargar</a></li>
-        <li><a href="#">Conexiones</a></li>
+        <li><a href="buscador.jsp">Buscar</a></li>
+        <li><a href="conexiones.jsp">Cargar</a></li>
       </ul>
-
-      <ul id="nav-mobile" class="side-nav">
-        <li><a href="#">Navbar Link</a></li>
-      </ul>
-      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
   </nav>
 
@@ -78,13 +73,18 @@
               <i class="circle red tooltipped" data-position="left" data-delay="50" data-tooltip="Estandar de metadatos"></i>
               <a class="title" href="${oa.url}">${oa.titulo}</a>
               <p class="autor">${oa.autor}</p>
-              <p class="abstract">${oa.abst}</p>         
+			  <div>
+		      	<p class="abstract" style="display:inline">${fn:substring(oa.abst, 0, 1024)}...
+			  	<a href="${oa.url}" class="read_more">Leer más</a></p>
+			  </div>
+				
+				     
             </li>
          </c:forEach>    
   </ul>
       
     <c:if test="${ empty oas.oas}">
-		<h4>No hay resultados</h2>    
+		<h4>No hay resultados</h4>    
 	</c:if>
 
   <hr style="border-top: 1px dashed black">
